@@ -1,17 +1,22 @@
 #include "main.h"
 
-/*
- * File: _printf.c
- * Auth: Your Name
- * Description: Custom implementation of printf.
- * Supports specifiers: %c, %s, %, %d, %i.
+/**
+ * _putchar - writes a character to stdout
+ * @c: The character to print
+ *
+ * Return: 1 on success, -1 on error
  */
-
 int _putchar(char c)
 {
     return (write(1, &c, 1));
 }
 
+/**
+ * print_string - Prints a string to stdout
+ * @str: Pointer to the string to print
+ *
+ * Return: The number of characters printed
+ */
 static int print_string(char *str)
 {
     int count = 0;
@@ -25,6 +30,12 @@ static int print_string(char *str)
     return (count);
 }
 
+/**
+ * print_number - Prints an integer to stdout
+ * @n: Integer to print
+ *
+ * Return: The number of characters printed
+ */
 static int print_number(int n)
 {
     int count = 0;
