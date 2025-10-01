@@ -1,10 +1,15 @@
-#include<unistd.h>
+/*
+ * File: _putchar.c
+ * Description: Writes a single character to stdout.
+ */
+
+#include "main.h"
+
 /**
- * _putchar - writes the character c to stdout
+ * _putchar - writes a character to stdout
  * @c: The character to print
  *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ * Return: 1 on success, -1 on error
  */
 int _putchar(char c)
 {

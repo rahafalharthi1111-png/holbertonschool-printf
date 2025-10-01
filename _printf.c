@@ -1,57 +1,52 @@
-/*
- * File: _printf.c
- * Description: Helpers used by _printf (string and number printers).
- * Contains implementations of print_string and print_number.
- */
-
 #include "main.h"
-#include<stddef.h>
 
 /**
- * print_string - Prints a string to stdout
- * @str: Pointer to the string to print
+ * _printf - Produces output according to a format
+ * @format: Format string containing directives
  *
- * Return: The number of characters printed
+ * Return: The number of characters printed (excluding the null byte),
+ * or -1 if an error occurs
  */
-int print_string(char *str)
+int _printf(const char *format, ...)
 {
+	va_list ap;
 	int count = 0;
 
-	if (str == NULL)
-		str = "(null)";
+	if (format == NULL)
+		return (-1);
 
-	while (*str)
-		count += _putchar(*str++);
+	va_start(ap, format);
 
+	while (*format)
+	{
+		if (*format != '%')
+		{
+			count += _putchar(*format++);
+			continue;
+		}
+
+		format++; /* skip '%' */
+
+		if (*format == '\0')
+			break;
+
+		if (*format == 'c')
+			count += _putchar(va_arg(ap, int));
+		else if (*format == 's')
+			count += print_string(va_arg(ap, char *));
+		else if (*format == '%')
+			count += _putchar('%');
+		else if (*format == 'd' || *format == 'i')
+			count += print_number(va_arg(ap, int));
+		else
+		{
+			/* Unknown specifier: print it verbatim */
+			count += _putchar('%');
+			count += _putchar(*format);
+		}
+		format++;
+	}
+
+	va_end(ap);
 	return (count);
 }
-
-/**
- * print_number - Prints an integer to stdout
- * @n: Integer to print
- *
- * Return: The number of characters printed
- */
-int print_number(int n)
-{
-	int count = 0;
-	unsigned int num = 0;
-
-	if (n < 0)
-	{
-		count += _putchar('-');
-		num = (unsigned int)(-n);
-	}
-	else
-	{
-		num = (unsigned int)n;
-	}
-
-	if (num / 10)
-		count += print_number(num / 10);
-
-	count += _putchar((num % 10) + '0');
-
-	return (count);
-}
-
