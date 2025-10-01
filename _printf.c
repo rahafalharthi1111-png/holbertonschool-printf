@@ -2,8 +2,9 @@
 
 /*
  * File: _printf.c
- * Description: Minimal implementation of printf.
- * Supports conversion specifiers: c, s, %, d, i.
+ * Auth: Your Name
+ * Description: Custom implementation of printf.
+ * Supports specifiers: %c, %s, %, %d, %i.
  */
 
 int _putchar(char c)
