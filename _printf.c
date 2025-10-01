@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * _putchar - writes a character to stdout
+ * _putchar - Writes one character to stdout
  * @c: The character to print
  *
  * Return: 1 on success, -1 on error
@@ -52,9 +52,10 @@ static int print_number(int n)
     }
 
     if (num / 10)
-        count += print_number(num / 10);
+        count += print_number((int)(num / 10));
 
-    count += _putchar((num % 10) + '0');
+    count += _putchar((char)((num % 10) + '0'));
+
     return (count);
 }
 
@@ -62,7 +63,7 @@ static int print_number(int n)
  * _printf - Produces output according to a format
  * @format: Format string containing directives
  *
- * Return: The number of characters printed (excluding the null byte),
+ * Return: Number of characters printed (excluding the null byte),
  * or -1 on error (NULL format or stray '%' at end)
  */
 int _printf(const char *format, ...)
@@ -92,15 +93,24 @@ int _printf(const char *format, ...)
         }
 
         if (*format == 'c')
+        {
             count += _putchar((char)va_arg(ap, int));
+        }
         else if (*format == 's')
+        {
             count += print_string(va_arg(ap, char *));
+        }
         else if (*format == '%')
+        {
             count += _putchar('%');
+        }
         else if (*format == 'd' || *format == 'i')
+        {
             count += print_number(va_arg(ap, int));
+        }
         else
         {
+            /* Unknown specifier: print it verbatim */
             count += _putchar('%');
             count += _putchar(*format);
         }
@@ -110,3 +120,4 @@ int _printf(const char *format, ...)
     va_end(ap);
     return (count);
 }
+
