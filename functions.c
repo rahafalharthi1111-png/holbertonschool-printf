@@ -1,11 +1,10 @@
 /*
  * File: functions.c
- * Description: Helper functions used by _printf
- * Contains implementations of print_string and print_number.
+ * Description: Helper functions used by _printf.
  */
 
 #include "main.h"
-#include<stddef.h>
+
 /**
  * print_string - Prints a string to stdout
  * @str: Pointer to the string to print
@@ -34,23 +33,21 @@ int print_string(char *str)
 int print_number(int n)
 {
 	int count = 0;
-	unsigned int num;
+	unsigned int num = 0;
 
 	if (n < 0)
 	{
 		count += _putchar('-');
-		num = -n;
+		num = (unsigned int)(-n);
 	}
 	else
 	{
-		num = n;
+		num = (unsigned int)n;
 	}
 
 	if (num / 10)
 		count += print_number(num / 10);
 
 	count += _putchar((num % 10) + '0');
-
 	return (count);
 }
-
