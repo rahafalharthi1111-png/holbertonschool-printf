@@ -25,7 +25,10 @@ static int print_string(char *str)
         str = "(null)";
 
     while (*str)
-        count += _putchar(*str++);
+    {
+        count += _putchar(*str);
+        str++;
+    }
 
     return (count);
 }
@@ -80,11 +83,13 @@ int _printf(const char *format, ...)
     {
         if (*format != '%')
         {
-            count += _putchar(*format++);
+            count += _putchar(*format);
+            format++;
             continue;
         }
 
-        format++; /* skip '%' */
+        /* skip '%' */
+        format++;
 
         if (*format == '\0')
         {
@@ -110,14 +115,13 @@ int _printf(const char *format, ...)
         }
         else
         {
-            /* Unknown specifier: print it verbatim */
             count += _putchar('%');
             count += _putchar(*format);
         }
+
         format++;
     }
 
     va_end(ap);
     return (count);
 }
-
